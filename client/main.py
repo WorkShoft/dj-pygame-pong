@@ -1,4 +1,5 @@
-import sys
+from game import Game
 
 if __name__ == "__main__":
-    sys.exit("Hello world")
+    game = Game()
+    game.run()

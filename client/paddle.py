@@ -12,7 +12,7 @@ class Paddle(pygame.sprite.Sprite):
         self.y = y
 
         self.max_x = constants.SCREEN_WIDTH - self.width
-        self.max_y = constants.SCREEN_HEIGHT - self.height 
+        self.max_y = constants.SCREEN_HEIGHT - self.height
 
         self.color = color if color else (100, 100, 100)
 
@@ -20,19 +20,16 @@ class Paddle(pygame.sprite.Sprite):
         self.image.fill(100)
 
         self.rect = self.image.get_rect()
-        
+
         super(Paddle, self).__init__(*args, **kwargs)
 
     def update(self):
-        self.rect.x = self.x 
+        self.rect.x = self.x
         self.rect.y = self.y
 
     def move(self, x=0, y=0):
-        if y < 0 and self.y > 0 :
-            self.y += y 
+        if y < 0 and self.y > 0:
+            self.y += y
 
         elif y > 0 and self.y < self.max_y:
-            self.y += y 
-                
-                     
-            
+            self.y += y
