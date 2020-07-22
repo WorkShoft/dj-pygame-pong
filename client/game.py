@@ -4,6 +4,7 @@ import pygame
 import constants
 
 from paddle import Paddle
+from ball import Ball
 
 
 class Game:
@@ -18,8 +19,11 @@ class Game:
         self.paddle_two = Paddle(color=(200, 0, 0))
         self.paddle_two.x = self.paddle_two.max_x
 
+        self.ball = Ball(x=constants.SCREEN_WIDTH / 2, y=constants.SCREEN_HEIGHT / 2)
+
         self.setup_groups()
         self.paddle_group.add(self.paddle_one, self.paddle_two)
+        self.ball_group.add(self.ball)
 
     def update(self):
         for event in pygame.event.get():
@@ -42,6 +46,7 @@ class Game:
     def render(self):
         self.screen.fill((210, 210, 210))
         self.paddle_group.draw(self.screen)
+        self.ball_group.draw(self.screen)
 
         pygame.display.flip()
 
