@@ -14,10 +14,10 @@ class Paddle(pygame.sprite.Sprite):
         self.max_x = constants.SCREEN_WIDTH - self.width
         self.max_y = constants.SCREEN_HEIGHT - self.height
 
-        self.color = color if color else (100, 100, 100)
+        self.color = color if color else (0, 0, 155)
 
         self.image = pygame.Surface((self.width, self.height))
-        self.image.fill(100)
+        self.image.fill(self.color)
 
         self.rect = self.image.get_rect()
 
