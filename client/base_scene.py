@@ -14,3 +14,6 @@ class BaseScene:
 
     def update_keyboard(self):
         raise NotImplementedError
+
+    def set_data(self, **data):
+        raise NotImplementedError
