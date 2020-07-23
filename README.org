@@ -1,7 +1,7 @@
 #+OPTIONS: ^:nil
 #+TITLE: Django & Pygame Pong
 
-A multiplayer Pong game that uses Django Channels as a game server, and Pygame 2 as a client.
+A multiplayer Pong game that uses Django Channels as a game server and Pygame 2 as a client.
 
 * Project setup
 #+BEGIN_SRC bash
