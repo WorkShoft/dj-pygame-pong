@@ -2,10 +2,16 @@ import asyncio
 import websockets
 
 
-async def move(x, y):
-    uri = "ws://localhost:8000"
-    async with websockets.connect(uri) as websocket:
-        await websocket.send(
-            {"x": x, "y": y,}
+class WebsocketsClient():
+    def __init__(game):
+        self.uri = f"ws://localhost:8000/{game}/"
+
+    async def connect(self):
+        self.connection = await websockets.client.connect(self.uri)
+        
+    async def move(self, direction):
+        await self.connection.send(
+            {"direction": direction, }
         )
-        await websocket.recv()
+        
+        await self.connection.recv()
