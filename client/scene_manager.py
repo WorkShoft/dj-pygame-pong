@@ -8,6 +8,11 @@ class SceneManager:
             self.current_scene.update()
             self.current_scene.render()
 
-    def switch_scene(self, scene):
+    def switch_scene(self, scene, **scene_data):
         if scene in self.scenes:
             self.current_scene = self.scenes[scene]
+
+        if scene_data:
+            self.current_scene.set_data(scene_data)
+
+            
