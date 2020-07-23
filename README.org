@@ -4,11 +4,17 @@
 A multiplayer Pong game that uses Django Channels as a game server, and Pygame 2 as a client.
 
 * Project setup
-
-#+BEGIN_SRC python3
+#+BEGIN_SRC bash
 pip install -r requirements.txt
+make migrate
 #+END_SRC 
 
 * Running the game
 ** Running the Channels server
+#+BEGIN_SRC bash
+make runserver
+#+END_SRC 
 ** Running the Pygame client
+#+BEGIN_SRC bash
+make runclient
+#+END_SRC 
