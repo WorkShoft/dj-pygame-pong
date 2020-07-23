@@ -8,12 +8,8 @@ from ball import Ball
 
 
 class Game:
-    def __init__(self):
-        pygame.init()
-
-        self.screen = pygame.display.set_mode(
-            [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
-        )
+    def __init__(self, screen):
+        self.screen = screen
 
         self.paddle_one = Paddle()
         self.paddle_two = Paddle(color=(200, 0, 0))
@@ -38,10 +34,10 @@ class Game:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_s]:
-            self.paddle_one.move(y=-1)
+            self.paddle_one.move(y=1)
 
         elif keys[pygame.K_w]:
-            self.paddle_one.move(y=1)
+            self.paddle_one.move(y=-1)
 
     def render(self):
         self.screen.fill((210, 210, 210))
@@ -53,11 +49,6 @@ class Game:
     def setup_groups(self):
         self.paddle_group = pygame.sprite.Group()
         self.ball_group = pygame.sprite.Group()
-
-    def run(self):
-        while True:
-            self.update()
-            self.render()
 
     def close(self):
         pygame.quit()
