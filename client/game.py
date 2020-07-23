@@ -6,8 +6,10 @@ import constants
 from paddle import Paddle
 from ball import Ball
 
+from base_scene import BaseScene
 
-class Game:
+
+class Game(BaseScene):
     def __init__(self, screen):
         self.screen = screen
 
@@ -40,7 +42,7 @@ class Game:
             self.paddle_one.move(y=-1)
 
     def render(self):
-        self.screen.fill((210, 210, 210))
+        self.screen.fill((255, 255, 255))
         self.paddle_group.draw(self.screen)
         self.ball_group.draw(self.screen)
 
@@ -49,7 +51,3 @@ class Game:
     def setup_groups(self):
         self.paddle_group = pygame.sprite.Group()
         self.ball_group = pygame.sprite.Group()
-
-    def close(self):
-        pygame.quit()
-        sys.exit("Closing game")

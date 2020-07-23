@@ -1,4 +1,4 @@
-class BaseScene:    
+class BaseScene:
     def close(self):
         pygame.quit()
         sys.exit("Closing game")

@@ -39,6 +39,3 @@ def load_scene_manager(scenes, initial=None):
         scene_manager.switch_scene(initial)
 
     return scene_manager
-
-
-
