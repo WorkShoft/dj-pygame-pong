@@ -60,7 +60,7 @@ class Menu:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RETURN]:
-            self.scene_manager.switch_scene("game")
+            self.scene_manager.switch_scene("game", name=self.game_name)
 
     def render_ui(self):
         if time.time() - self.time < 3:
@@ -91,3 +91,6 @@ class Menu:
         self.render_ui()
 
         pygame.display.flip()
+
+    def set_data(self):
+        pass
