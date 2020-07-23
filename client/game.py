@@ -11,6 +11,7 @@ from base_scene import BaseScene
 class Game(BaseScene):
     def __init__(self, screen):
         self.screen = screen
+        self.data = None
 
         self.paddle_one = Paddle()
         self.paddle_two = Paddle(color=(200, 0, 0))
@@ -21,6 +22,12 @@ class Game(BaseScene):
         self.setup_groups()
         self.paddle_group.add(self.paddle_one, self.paddle_two)
         self.ball_group.add(self.ball)
+
+    def set_data(self, data):
+        self.data = data
+
+        if "name" in self.data:
+            print(f"Opening a websocket connection at {self.data['name']}")
 
     def update(self):
         for event in pygame.event.get():
