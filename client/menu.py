@@ -6,7 +6,7 @@ import constants
 from base_scene import BaseScene
 
 
-class Menu:
+class Menu(BaseScene):
     def __init__(self, screen):
         self.screen = screen
 
