@@ -8,6 +8,9 @@ from scene_manager import SceneManager
 
 def load_screen():
     pygame.init()
+    pygame.mixer.init()
+
+    pygame.display.set_caption("Pong")
 
     screen = pygame.display.set_mode([constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT])
 
@@ -36,3 +39,6 @@ def load_scene_manager(scenes, initial=None):
         scene_manager.switch_scene(initial)
 
     return scene_manager
+
+
+
