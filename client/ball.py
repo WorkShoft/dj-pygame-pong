@@ -5,8 +5,8 @@ import constants
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, x=0, y=0, color=None, *args, **kwargs):
-        self.width = 10
-        self.height = 10
+        self.width = constants.BALL_WIDTH
+        self.height = constants.BALL_HEIGHT
 
         self.x = x
         self.y = y
