@@ -1,6 +1,7 @@
 import sys
 import pygame
 
+
 class BaseScene:
     def close(self):
         pygame.quit()

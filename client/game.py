@@ -12,7 +12,7 @@ from base_scene import BaseScene
 
 class Game(BaseScene):
     state = None
-    
+
     def __init__(self, screen):
         self.screen = screen
         self.data = None
@@ -26,7 +26,7 @@ class Game(BaseScene):
         self.setup_groups()
         self.paddle_group.add(self.paddle_one, self.paddle_two)
         self.ball_group.add(self.ball)
-        
+
     def set_data(self, data):
         self.data = data
 
@@ -46,22 +46,22 @@ class Game(BaseScene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.close()
-            
+
         self.update_keyboard()
         self.paddle_group.update()
         self.ball_group.update()
 
         self.apply_state()
-    
-    def apply_state(self):        
+
+    def apply_state(self):
         if Game.state:
             for sprite_name, sprite_data in Game.state.items():
                 sprite = getattr(self, sprite_name, {})
 
                 if sprite:
                     for k, v in sprite_data.items():
-                        setattr(sprite, k, v)                                      
-    
+                        setattr(sprite, k, v)
+
     @staticmethod
     def on_message(connection, state):
         state_json = json.loads(state)
@@ -80,7 +80,7 @@ class Game(BaseScene):
 
     def process_messages(self):
         pass
-                
+
     def render(self):
         self.screen.fill((255, 255, 255))
         self.paddle_group.draw(self.screen)
