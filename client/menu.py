@@ -20,13 +20,14 @@ class Menu(BaseScene):
 
         self.load_sound()
         self.intro_sound.play(fade_ms=2000)
-        self.background_music.play(fade_ms=6000)
 
         self.load_ui()
 
         self.plus_button_rect = self.plus_button.get_rect()
 
         self.time = time.time()
+
+        self.playing_music = False
 
     def update(self):
         for event in pygame.event.get():
@@ -57,7 +58,7 @@ class Menu(BaseScene):
         self.typing_sound = pygame.mixer.Sound(
             utils.get_resource("194799__jim-ph__keyboard5.wav")
         )
-        self.background_music = pygame.mixer.Sound(
+        self.background_music = pygame.mixer.music.load(
             utils.get_resource("Synthwave7.wav")
         )
 
@@ -96,6 +97,10 @@ class Menu(BaseScene):
                 self.title,
                 (constants.SCREEN_CENTER[0] - self.plus_button_rect.width / 2, 10),
             )
+
+            if not self.playing_music:
+                pygame.mixer.music.play(fade_ms=4000)
+                self.playing_music = True
 
     def render(self):
         self.screen.fill((255, 255, 255))
