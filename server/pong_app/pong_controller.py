@@ -37,9 +37,8 @@ class BallController:
         self.item["x"] = constants.SCREEN_CENTER[0]
         self.item["y"] = 10
 
-
     def move(self):
-        if time.time() - self.time > 0.01:                
+        if time.time() - self.time > 0.01:
             if (
                 self.item["y"] > constants.MAX_BALL_Y
                 or self.item["y"] < constants.BALL_HEIGHT
@@ -47,23 +46,31 @@ class BallController:
                 self.vel_y = -self.vel_y
 
             if 0 < self.item["x"] <= constants.PADDLE_WIDTH:
-                if self.paddle_one["y"] < self.item["y"] < (self.paddle_one["y"] + constants.PADDLE_HEIGHT):
+                if (
+                    self.paddle_one["y"]
+                    < self.item["y"]
+                    < (self.paddle_one["y"] + constants.PADDLE_HEIGHT)
+                ):
                     self.vel_x = -self.vel_x
                     self.item["x"] += 7
 
                 else:
                     self.paddle_two["score"] += 1
                     self.reset_ball()
-                                
+
             elif constants.SCREEN_WIDTH > self.item["x"] >= constants.MAX_PADDLE_X:
-                if self.paddle_two["y"] < self.item["y"] < (self.paddle_two["y"] + constants.PADDLE_HEIGHT):                    
+                if (
+                    self.paddle_two["y"]
+                    < self.item["y"]
+                    < (self.paddle_two["y"] + constants.PADDLE_HEIGHT)
+                ):
                     self.vel_x = -self.vel_x
                     self.item["x"] -= 7
 
                 else:
                     self.paddle_one["score"] += 1
                     self.reset_ball()
-                
+
             self.item["x"] += self.vel_x
             self.item["y"] += self.vel_y
 

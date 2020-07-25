@@ -28,9 +28,7 @@ class Game(BaseScene):
         self.paddle_group.add(self.paddle_one, self.paddle_two)
         self.ball_group.add(self.ball)
 
-        self.font = pygame.font.Font(
-            utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 24
-        )
+        self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 24)
 
     def set_data(self, data):
         self.data = data
@@ -65,7 +63,7 @@ class Game(BaseScene):
 
                 if sprite:
                     for k, v in sprite_data.items():
-                        setattr(sprite, k, v)                        
+                        setattr(sprite, k, v)
 
     @staticmethod
     def on_message(connection, state):
@@ -87,10 +85,14 @@ class Game(BaseScene):
             score_one = Game.state["paddle_one"]["score"]
             score_two = Game.state["paddle_two"]["score"]
 
-            self.score = self.font.render(f"{score_one} {score_two}", True, constants.BUTTON_COLOR)
+            self.score = self.font.render(
+                f"{score_one} {score_two}", True, constants.BUTTON_COLOR
+            )
             score_rect = self.score.get_rect()
-            self.screen.blit(self.score, (constants.SCREEN_CENTER[0] - score_rect.width / 2, 10))                
-        
+            self.screen.blit(
+                self.score, (constants.SCREEN_CENTER[0] - score_rect.width / 2, 10)
+            )
+
     def render(self):
         self.screen.fill((255, 255, 255))
         self.paddle_group.draw(self.screen)

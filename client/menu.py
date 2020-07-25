@@ -39,7 +39,7 @@ class Menu(BaseScene):
                 else:
                     self.game_name += event.unicode
                     self.type_prompt = self.font.render(
-                        f"> {self.game_name}", True, constants.BUTTON_COLOR
+                        f">{self.game_name}", True, constants.BUTTON_COLOR
                     )
                     self.typing_sound.play()
 
@@ -63,9 +63,7 @@ class Menu(BaseScene):
         )
 
     def load_ui(self):
-        self.font = pygame.font.Font(
-            utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 36
-        )
+        self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 36)
 
         self.title = self.font.render("PONG", True, constants.BUTTON_COLOR)
         self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)
