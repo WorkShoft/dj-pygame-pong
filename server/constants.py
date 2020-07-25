@@ -18,7 +18,7 @@ MAX_BALL_X = SCREEN_WIDTH - BALL_WIDTH
 MAX_BALL_Y = SCREEN_HEIGHT - BALL_HEIGHT
 
 INITIAL_STATE = {
-    "paddle_one": {"x": 0, "y": 0,},
-    "paddle_two": {"x": SCREEN_WIDTH - PADDLE_WIDTH, "y": 0,},
+    "paddle_one": {"x": 0, "y": 0, "score": 0, },
+    "paddle_two": {"x": SCREEN_WIDTH - PADDLE_WIDTH, "y": 0, "score": 0, },
     "ball": {"x": SCREEN_CENTER[0], "y": BALL_HEIGHT,},
 }
