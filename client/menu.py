@@ -26,7 +26,7 @@ class Menu(BaseScene):
         self.plus_button_rect = self.plus_button.get_rect()
 
         self.time = time.time()
-        
+
     def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -56,12 +56,14 @@ class Menu(BaseScene):
         self.typing_sound = pygame.mixer.Sound(
             utils.get_resource("194799__jim-ph__keyboard5.wav")
         )
-        
+
     def load_ui(self):
         self.title_font = pygame.font.Font(
             "client/resources/street_cred/street_cred.ttf", 64
         )
-        self.font = pygame.font.Font(utils.get_resource("street_cred/street_cred.ttf"), 36)
+        self.font = pygame.font.Font(
+            utils.get_resource("street_cred/street_cred.ttf"), 36
+        )
 
         self.title = self.title_font.render("Pong", True, constants.BUTTON_COLOR)
         self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)
@@ -69,7 +71,7 @@ class Menu(BaseScene):
         self.type_prompt = self.font.render(
             f"> {self.game_name}", True, constants.BUTTON_COLOR
         )
-        
+
     def render_ui(self):
         if time.time() - self.time < 3:
             self.screen.blit(self.logo, (self.x, self.y))

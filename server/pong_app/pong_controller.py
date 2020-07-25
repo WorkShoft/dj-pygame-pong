@@ -1,5 +1,7 @@
 import constants
 
+import time
+
 
 class GameController:
     state = constants.INITIAL_STATE
@@ -22,21 +24,25 @@ class BallController:
     def __init__(self):
         self.state = GameController.state
         self.item = self.state["ball"]
-        self.vel_x = 5
-        self.vel_y = 5
+        self.vel_x = 7
+        self.vel_y = 7
+        self.time = time.time()
 
     def move(self):
-        if (
-            self.item["y"] > constants.MAX_BALL_Y
-            or self.item["y"] < constants.BALL_HEIGHT
-        ):
-            self.vel_y = -self.vel_y
+        if time.time() - self.time > 0.01:
+            if (
+                self.item["y"] > constants.MAX_BALL_Y
+                or self.item["y"] < constants.BALL_HEIGHT
+            ):
+                self.vel_y = -self.vel_y
 
-        if (
-            self.item["x"] > constants.MAX_BALL_X
-            or self.item["x"] < constants.BALL_WIDTH
-        ):
-            self.vel_x = -self.vel_x
+            if (
+                self.item["x"] > constants.MAX_BALL_X
+                or self.item["x"] < constants.BALL_WIDTH
+            ):
+                self.vel_x = -self.vel_x
 
-        self.item["x"] += self.vel_x
-        self.item["y"] += self.vel_y
+            self.item["x"] += self.vel_x
+            self.item["y"] += self.vel_y
+
+            self.time = time.time()
