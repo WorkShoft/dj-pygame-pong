@@ -23,8 +23,6 @@ class Menu(BaseScene):
 
         self.load_ui()
 
-        self.plus_button_rect = self.plus_button.get_rect()
-
         self.time = time.time()
 
         self.playing_music = False
@@ -66,11 +64,14 @@ class Menu(BaseScene):
         self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 36)
 
         self.title = self.font.render("PONG", True, constants.BUTTON_COLOR)
-        self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)
+        self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)        
 
         self.type_prompt = self.font.render(
             f"> {self.game_name}", True, constants.BUTTON_COLOR
         )
+
+        self.plus_button_rect = self.plus_button.get_rect()
+        self.title_rect = self.title.get_rect()
 
     def render_ui(self):
         if time.time() - self.time < 3:
@@ -93,7 +94,7 @@ class Menu(BaseScene):
             )
             self.screen.blit(
                 self.title,
-                (constants.SCREEN_CENTER[0] - self.plus_button_rect.width / 2, 10),
+                (constants.SCREEN_CENTER[0] - self.title_rect.width / 2, 10),
             )
 
             if not self.playing_music:
