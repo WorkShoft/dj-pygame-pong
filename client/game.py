@@ -66,7 +66,6 @@ class Game(BaseScene):
     def on_message(connection, state):
         state_json = json.loads(state)
         Game.state = state_json
-        print(Game.state)
 
     def update_keyboard(self):
         keys = pygame.key.get_pressed()
