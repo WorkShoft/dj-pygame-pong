@@ -19,7 +19,8 @@ class Menu(BaseScene):
         self.game_name = ""
 
         self.load_sound()
-        self.sound.play(fade_ms=2000)
+        self.intro_sound.play(fade_ms=2000)
+        self.background_music.play(fade_ms=6000)
 
         self.load_ui()
 
@@ -50,22 +51,22 @@ class Menu(BaseScene):
             self.scene_manager.switch_scene("game", name=self.game_name)
 
     def load_sound(self):
-        self.sound = pygame.mixer.Sound(
+        self.intro_sound = pygame.mixer.Sound(
             utils.get_resource("334261__projectsu012__coin-chime.wav")
         )
         self.typing_sound = pygame.mixer.Sound(
             utils.get_resource("194799__jim-ph__keyboard5.wav")
         )
+        self.background_music = pygame.mixer.Sound(
+            utils.get_resource("Synthwave7.wav")
+        )
 
     def load_ui(self):
-        self.title_font = pygame.font.Font(
-            "client/resources/street_cred/street_cred.ttf", 64
-        )
         self.font = pygame.font.Font(
-            utils.get_resource("street_cred/street_cred.ttf"), 36
+            utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 36
         )
 
-        self.title = self.title_font.render("Pong", True, constants.BUTTON_COLOR)
+        self.title = self.font.render("PONG", True, constants.BUTTON_COLOR)
         self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)
 
         self.type_prompt = self.font.render(
@@ -93,7 +94,7 @@ class Menu(BaseScene):
             )
             self.screen.blit(
                 self.title,
-                (constants.SCREEN_CENTER[0] - self.plus_button_rect.width / 2, 0),
+                (constants.SCREEN_CENTER[0] - self.plus_button_rect.width / 2, 10),
             )
 
     def render(self):
