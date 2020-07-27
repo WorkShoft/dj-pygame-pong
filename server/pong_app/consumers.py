@@ -2,16 +2,14 @@ import json
 
 import constants
 
-import threading
-
 from .pong_controller import GameController, PaddleController, BallController
+from .thread_pool import ThreadPool
 
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
 
 class PongConsumer(WebsocketConsumer):
-    paddle_controller = PaddleController()
     ball_controller = BallController()
 
     def connect(self):
@@ -20,10 +18,18 @@ class PongConsumer(WebsocketConsumer):
         async_to_sync(self.channel_layer.group_add)(self.game, self.channel_name)
 
         self.accept()
+        
+        if self.game not in ThreadPool.threads:
+            ThreadPool.add_game(self.game, self)
 
-        self.state_thread = threading.Thread(target=self.propagate_state)
-        self.state_thread.daemon = True
-        self.state_thread.start()
+        ThreadPool.threads[self.game]["player_count"] += 1
+
+        if ThreadPool.threads[self.game]["player_count"] == 1:            
+            self.paddle_controller = PaddleController("paddle_one")
+
+        else:
+            self.paddle_controller = PaddleController("paddle_two")
+            
 
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(self.game, self.channel_name)
@@ -31,7 +37,7 @@ class PongConsumer(WebsocketConsumer):
     def receive(self, text_data):
         direction = json.loads(text_data).get("direction")
 
-        PongConsumer.paddle_controller.move(direction)
+        self.paddle_controller.move(direction)
 
     def propagate_state(self):
         while True:
