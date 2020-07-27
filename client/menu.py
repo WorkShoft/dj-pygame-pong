@@ -25,7 +25,9 @@ class Menu(BaseScene):
 
         self.time = time.time()
 
-        self.playing_music = False
+        self.playing_music = True
+
+        pygame.mixer.music.play(fade_ms=20000)
 
     def update(self):
         for event in pygame.event.get():
@@ -34,21 +36,29 @@ class Menu(BaseScene):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.close()
+
                 else:
                     self.game_name += event.unicode
                     self.type_prompt = self.font.render(
                         f">{self.game_name}", True, constants.BUTTON_COLOR
                     )
                     self.typing_sound.play()
+                    
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                print(self.audio_icon_rect, mouse_pos)
+                if self.audio_icon_rect.collidepoint(mouse_pos):
+                    pygame.mixer.music.pause() if self.playing_music else pygame.mixer.music.unpause()
+                    self.playing_music = not self.playing_music
 
         self.update_keyboard()
 
     def update_keyboard(self):
         keys = pygame.key.get_pressed()
-
+        
         if keys[pygame.K_RETURN]:
             self.scene_manager.switch_scene("game", name=self.game_name)
-
+    
     def load_sound(self):
         self.intro_sound = pygame.mixer.Sound(
             utils.get_resource("334261__projectsu012__coin-chime.wav")
@@ -64,7 +74,7 @@ class Menu(BaseScene):
         self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 36)
 
         self.title = self.font.render("PONG", True, constants.BUTTON_COLOR)
-        self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)        
+        self.plus_button = self.font.render("Enter game", True, constants.BUTTON_COLOR)
 
         self.type_prompt = self.font.render(
             f"> {self.game_name}", True, constants.BUTTON_COLOR
@@ -72,6 +82,12 @@ class Menu(BaseScene):
 
         self.plus_button_rect = self.plus_button.get_rect()
         self.title_rect = self.title.get_rect()
+
+        self.audio_icon = pygame.image.load(utils.get_resource("500px-Speaker_Icon.svg.png"))
+        self.audio_icon = pygame.transform.scale(self.audio_icon, (constants.AUDIO_ICON_WIDTH, constants.AUDIO_ICON_HEIGHT))
+        self.audio_icon_rect = self.audio_icon.get_rect()
+        self.audio_icon_rect.x = constants.AUDIO_ICON_X
+        self.audio_icon_rect.y = constants.AUDIO_ICON_Y
 
     def render_ui(self):
         if time.time() - self.time < 3:
@@ -97,10 +113,10 @@ class Menu(BaseScene):
                 (constants.SCREEN_CENTER[0] - self.title_rect.width / 2, 10),
             )
 
-            if not self.playing_music:
-                pygame.mixer.music.play(fade_ms=4000)
-                self.playing_music = True
-
+            self.screen.blit(
+                self.audio_icon, (constants.AUDIO_ICON_X, constants.AUDIO_ICON_Y)
+            )
+            
     def render(self):
         self.screen.fill((255, 255, 255))
         self.render_ui()
