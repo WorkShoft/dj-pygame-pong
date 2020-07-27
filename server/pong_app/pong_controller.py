@@ -8,9 +8,13 @@ class GameController:
 
 
 class PaddleController:
-    def __init__(self):
+    def __init__(self, paddle):
+        """
+        paddle: 'paddle_one' | 'paddle_two'
+        """
+        
         self.state = GameController.state
-        self.item = self.state["paddle_one"]
+        self.item = self.state[paddle]
 
     def move(self, direction):
         if direction == "down" and self.item["y"] < constants.MAX_PADDLE_Y:
