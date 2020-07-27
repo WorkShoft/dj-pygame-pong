@@ -28,7 +28,9 @@ class Game(BaseScene):
         self.paddle_group.add(self.paddle_one, self.paddle_two)
         self.ball_group.add(self.ball)
 
-        self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 24)
+        self.load_ui()
+
+        self.playing_music = True
 
     def set_data(self, data):
         self.data = data
@@ -49,6 +51,13 @@ class Game(BaseScene):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.close()
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                print(self.audio_icon_rect, mouse_pos)
+                if self.audio_icon_rect.collidepoint(mouse_pos):
+                    pygame.mixer.music.pause() if self.playing_music else pygame.mixer.music.unpause()
+                    self.playing_music = not self.playing_music
 
         self.update_keyboard()
         self.paddle_group.update()
@@ -80,6 +89,15 @@ class Game(BaseScene):
             elif keys[pygame.K_w]:
                 websocket_client.move(self.connection, "up")
 
+    def load_ui(self):
+        self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 24)
+        
+        self.audio_icon = pygame.image.load(utils.get_resource("500px-Speaker_Icon.svg.png"))
+        self.audio_icon = pygame.transform.scale(self.audio_icon, (constants.AUDIO_ICON_WIDTH, constants.AUDIO_ICON_HEIGHT))
+        self.audio_icon_rect = self.audio_icon.get_rect()
+        self.audio_icon_rect.x = constants.AUDIO_ICON_X
+        self.audio_icon_rect.y = constants.AUDIO_ICON_Y        
+
     def render_ui(self):
         if Game.state:
             score_one = Game.state["paddle_one"]["score"]
@@ -91,6 +109,10 @@ class Game(BaseScene):
             score_rect = self.score.get_rect()
             self.screen.blit(
                 self.score, (constants.SCREEN_CENTER[0] - score_rect.width / 2, 10)
+            )
+
+            self.screen.blit(
+                self.audio_icon, (constants.AUDIO_ICON_X, constants.AUDIO_ICON_Y)
             )
 
     def render(self):
