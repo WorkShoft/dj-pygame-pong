@@ -12,7 +12,7 @@ class PaddleController:
         """
         paddle: 'paddle_one' | 'paddle_two'
         """
-        
+
         self.state = GameController.state
         self.item = self.state[paddle]
 
@@ -58,11 +58,11 @@ class BallController:
                     self.vel_x = -self.vel_x
                     self.item["x"] += 7
 
-                else:
-                    self.paddle_two["score"] += 1
-                    self.reset_ball()
+            elif self.item["x"] < 0:
+                self.paddle_two["score"] += 1
+                self.reset_ball()
 
-            elif constants.SCREEN_WIDTH > self.item["x"] >= constants.MAX_PADDLE_X:
+            elif constants.SCREEN_WIDTH > self.item["x"] >= constants.MAX_BALL_X:
                 if (
                     self.paddle_two["y"]
                     < self.item["y"]
@@ -71,9 +71,9 @@ class BallController:
                     self.vel_x = -self.vel_x
                     self.item["x"] -= 7
 
-                else:
-                    self.paddle_one["score"] += 1
-                    self.reset_ball()
+            elif self.item["x"] >= constants.SCREEN_WIDTH:
+                self.paddle_one["score"] += 1
+                self.reset_ball()
 
             self.item["x"] += self.vel_x
             self.item["y"] += self.vel_y
