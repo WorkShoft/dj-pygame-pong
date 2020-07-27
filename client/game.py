@@ -91,12 +91,16 @@ class Game(BaseScene):
 
     def load_ui(self):
         self.font = pygame.font.Font(utils.get_resource("ZX-Spectrum/zxspectr.ttf"), 24)
-        
-        self.audio_icon = pygame.image.load(utils.get_resource("500px-Speaker_Icon.svg.png"))
-        self.audio_icon = pygame.transform.scale(self.audio_icon, (constants.AUDIO_ICON_WIDTH, constants.AUDIO_ICON_HEIGHT))
+
+        self.audio_icon = pygame.image.load(
+            utils.get_resource("500px-Speaker_Icon.svg.png")
+        )
+        self.audio_icon = pygame.transform.scale(
+            self.audio_icon, (constants.AUDIO_ICON_WIDTH, constants.AUDIO_ICON_HEIGHT)
+        )
         self.audio_icon_rect = self.audio_icon.get_rect()
         self.audio_icon_rect.x = constants.AUDIO_ICON_X
-        self.audio_icon_rect.y = constants.AUDIO_ICON_Y        
+        self.audio_icon_rect.y = constants.AUDIO_ICON_Y
 
     def render_ui(self):
         if Game.state:
