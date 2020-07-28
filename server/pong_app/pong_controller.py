@@ -14,6 +14,7 @@ class PaddleController:
         """
 
         self.state = GameController.state
+        self.paddle = paddle
         self.item = self.state[paddle]
 
     def move(self, direction):
@@ -22,6 +23,9 @@ class PaddleController:
 
         elif direction == "up" and self.item["y"] > 0:
             self.item["y"] -= 5
+
+    def __str__(self):
+        return self.paddle
 
 
 class BallController:
