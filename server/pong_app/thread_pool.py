@@ -12,7 +12,9 @@ class ThreadPool:
     def add_game(cls, game_name, consumer_instance):
         cls.threads[game_name] = {
             "thread": threading.Thread(target=consumer_instance.propagate_state),
-            "player_count": 0,
+            "paddle_one": False,
+            "paddle_two": False,
+            "active": False,
         }
         thread = cls.threads[game_name]["thread"]
         thread.daemon = True
