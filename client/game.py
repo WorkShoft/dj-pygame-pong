@@ -54,7 +54,7 @@ class Game(BaseScene):
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                print(self.audio_icon_rect, mouse_pos)
+
                 if self.audio_icon_rect.collidepoint(mouse_pos):
                     pygame.mixer.music.pause() if self.playing_music else pygame.mixer.music.unpause()
                     self.playing_music = not self.playing_music
