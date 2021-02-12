@@ -3,6 +3,8 @@
 
 A multiplayer Pong game that uses Django Channels as a game server and Pygame 2 as a client.
 
+[[https://www.youtube.com/watch?v=eBc2JVubN8w][Youtube Video Demo]]
+
 * Project setup
 
 #+BEGIN_SRC bash
